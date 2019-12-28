@@ -1,7 +1,6 @@
 from django.db import models
-import json
+from django.contrib.auth.models import User
 import re
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 class DishType(models.Model):
@@ -13,6 +12,10 @@ class DishType(models.Model):
     def __str__(self):
         return '%s' % self.name
 
+    def save(self, *args, **kwargs):
+        self.name = self.name.lower()
+        super(DishType, self).save(*args, **kwargs)
+
 
 class DishTemperature(models.Model):
     name = models.CharField(max_length=25)
@@ -23,15 +26,23 @@ class DishTemperature(models.Model):
     def __str__(self):
         return '%s' % self.name
 
+    def save(self, *args, **kwargs):
+        self.name = self.name.lower()
+        super(DishTemperature, self).save(*args, **kwargs)
+
 
 class Ingredient(models.Model):
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=50)
 
     class Meta:
         db_table = 'ingredient'
 
     def __str__(self):
         return '%s' % self.name
+
+    def save(self, *args, **kwargs):
+        self.name = self.name.lower()
+        super(Ingredient, self).save(*args, **kwargs)
 
 
 class TimeUnits(models.Model):
@@ -57,17 +68,18 @@ class DishIngredients(models.Model):
 
 class DishSteps(models.Model):
     dish = models.ForeignKey('Dish', on_delete=models.CASCADE)
-    step = models.IntegerField()
-    ingredients = models.IntegerField()
+    no_step = models.IntegerField()
     step = models.TextField()
     time = models.IntegerField()
     time_units = models.ForeignKey('TimeUnits', on_delete=models.CASCADE)
+    ingredients = models.IntegerField(null=True, blank=True)
+
 
     class Meta:
         db_table = 'dish_steps'
 
     def __str__(self):
-        return '%s' % self.dish+' '+self.step
+        return '%s' % self.dish+' '+str(self.no_step)
 
 
 class Dish(models.Model):
@@ -87,13 +99,13 @@ class DishAvailable(models.Model):
     dish = models.ForeignKey('Dish', on_delete=models.CASCADE)
     temporary = models.BooleanField(default=False)
     release_date = models.DateField()
-    end_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
 
     class Meta:
         db_table = 'dish_available'
 
     def __str__(self):
-        return '%s' % self.dish + ' ' + self.temporary
+        return '%s' % self.dish
 
 
 class Client(models.Model):
@@ -130,30 +142,12 @@ class Order(models.Model):
         db_table = 'order'
 
     def __str__(self):
-        return '%s' % self.name+' '+self.surname+' '+self.pk
+        return '%s' % str(self.client)+' '+str(self.order_time)+' '+str(self.pk)
 
     def save(self, *args, **kwargs):
         if not self.cancel:
             self.cancel_reason = None
         super(Order, self).save(*args, **kwargs)
-
-
-class OrderTrack(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
-    step = models.IntegerField()
-    end = models.BooleanField()
-
-    class Meta:
-        db_table = 'order_track'
-
-    def __str__(self):
-        return '%s' % self.order+' '+self.dish+' '+self.step
-
-    def save(self, *args, **kwargs):
-        if self.step >= self._loaded_values['step']:
-            self.step = self.step
-        super(OrderTrack, self).save(*args, **kwargs)
 
 
 class ClientAddress(models.Model):
@@ -180,13 +174,14 @@ class OrderDishes(models.Model):
         return '%s' % self.order
 
 
-class ClientDish(models.Model):
-    client = models.ForeignKey('Order', on_delete=models.CASCADE)
-    dish = models.ForeignKey('Dish', on_delete=models.CASCADE)
-    times = models.IntegerField(default=0)
+class OrderTrack(models.Model):
+    order = models.ForeignKey(OrderDishes, on_delete=models.CASCADE)
+    step = models.IntegerField()
+    end = models.BooleanField(default=False)
 
     class Meta:
-        db_table = 'client_dish'
+        db_table = 'order_track'
 
     def __str__(self):
-        return '%s' % self.dish
+        return '%s' % self.order+' '+str(self.step)
+

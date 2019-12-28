@@ -4,8 +4,6 @@ from . import views
 
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
 router.register(r'dish_type', views.DishTypeViewSet)
 router.register(r'dish_temperature', views.DishTemperatureViewSet)
 router.register(r'ingredient', views.IngredientViewSet)
@@ -19,11 +17,15 @@ router.register(r'order', views.OrderViewSet)
 router.register(r'order_track', views.OrderTrackViewSet)
 router.register(r'client_address', views.ClientAddressViewSet)
 router.register(r'order_dishes', views.OrderDishesViewSet)
-router.register(r'client_dish', views.ClientDishViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('add_dish/', views.add_new_dish),
-    path('add/', views.add_dish),
-    path('post/', views.post_dish),
+    path('dish_details/', views.get_dish),
+    path('add/', views.post_dish),
+    path('menu/', views.get_menu),
+    path('new_order/', views.post_order),
+    path('open_orders/', views.get_open_orders),
+    path('track_order/', views.track_order),
+    path('queue/', views.queue_time),
+
 ]

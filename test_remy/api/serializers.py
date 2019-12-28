@@ -3,18 +3,6 @@ from rest_framework import serializers
 from .models import *
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'groups']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
-
-
 class DishTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = DishType
@@ -45,10 +33,24 @@ class DishIngredientsSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
+class DishIngredientsDetailSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = DishIngredients
+        fields = ['ingredient']
+        depth = 1
+
+
 class DishStepsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = DishSteps
         fields = '__all__'
+
+
+class DishStepsDetailSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = DishSteps
+        exclude = ['dish']
+        depth = 2
 
 
 class DishSerializer(serializers.HyperlinkedModelSerializer):
@@ -57,10 +59,23 @@ class DishSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
+class DishDetailSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Dish
+        fields = '__all__'
+        depth = 3
+
+
 class DishAvailableSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = DishAvailable
         fields = '__all__'
+
+
+class DishAvailableDetailSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = DishAvailable
+        exclude = ['dish']
 
 
 class ClientSerializer(serializers.HyperlinkedModelSerializer):
@@ -90,10 +105,4 @@ class ClientAddressSerializer(serializers.HyperlinkedModelSerializer):
 class OrderDishesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = OrderDishes
-        fields = '__all__'
-
-
-class ClientDishSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = ClientDish
         fields = '__all__'
