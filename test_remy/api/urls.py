@@ -2,7 +2,6 @@ from django.urls import include, path
 from rest_framework import routers
 from . import views
 
-
 router = routers.DefaultRouter()
 router.register(r'dish_type', views.DishTypeViewSet)
 router.register(r'dish_temperature', views.DishTemperatureViewSet)
@@ -27,5 +26,6 @@ urlpatterns = [
     path('open_orders/', views.get_open_orders),
     path('track_order/', views.track_order),
     path('queue/', views.queue_time),
-
+    path('statistics_period/', views.summary_statistics),
+    path('recommendations/', views.recommendations),
 ]

@@ -1,9 +1,6 @@
-import datetime
-import requests
-from django.shortcuts import render
-from django.http import HttpResponse, Http404
+from django.http import Http404
 from .functions import *
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import json
@@ -109,80 +106,26 @@ def get_dish(request):
 @api_view(['POST'])
 def post_dish(request):
 
-    try:
+    json_string = json.dumps(request.data)
+    datastore = json.loads(json_string)
 
-        json_string = json.dumps(request.data)
-        datastore = json.loads(json_string)
+    for info in datastore['info']:
+        dish_type = get_dish_type(info)
+        dish_temperature = get_dish_temperature(info)
+        dish = set_dish(info, dish_type, dish_temperature)
 
-        for info in datastore['info']:
+    for available in datastore['available']:
+        set_dish_available(dish, available)
 
-            try:
-                dish_type = DishType.objects.get(name=info['dish_type']['name'].lower())
+    for ingredient in datastore['ingredients']:
+        set_ingredients(ingredient, dish)
 
-            except DishType.DoesNotExist:
-                dish_type = DishType.objects.create(name=info['dish_type']['name'].lower())
-                dish_type.save()
+    for step in datastore['steps']:
+        set_steps(step, dish)
 
-            try:
-                dish_temperature = DishTemperature.objects.get(name=info['dish_temperature']['name'].lower())
+    response = DishSerializer(dish, context={'request': request}).data
 
-            except DishTemperature.DoesNotExist:
-                dish_temperature = DishTemperature.objects.create(name=info['dish_temperature']['name'].lower())
-                dish_temperature.save()
-
-            try:
-                dish = Dish.objects.get(name=info['name'])
-
-            except Dish.DoesNotExist:
-                dish = Dish.objects.create(name=info['name'], description=info['description'],
-                                           dish_type=dish_type, dish_temperature=dish_temperature)
-
-        for available in datastore['available']:
-
-            try:
-                DishAvailable.objects.get(dish=dish, temporary=available['temporary'],
-                                          release_date=available['release_date'])
-
-            except DishAvailable.DoesNotExist:
-                DishAvailable.objects.create(dish=dish, temporary=available['temporary'],
-                                             release_date=available['release_date'],
-                                             end_date=available['end_date'],
-                                             )
-
-        for ingredient in datastore['ingredients']:
-
-            try:
-                ing = Ingredient.objects.get(name=ingredient['ingredient']['name'])
-
-            except Ingredient.DoesNotExist:
-                ing = Ingredient.objects.create(name=ingredient['ingredient']['name'])
-
-            try:
-                DishIngredients.objects.get(dish=dish, ingredient=ing)
-
-            except DishIngredients.DoesNotExist:
-                DishIngredients.objects.create(dish=dish, ingredient=ing)
-
-        for step in datastore['steps']:
-
-            try:
-                time_unit = TimeUnits.objects.get(name=step['time_units']['name'])
-
-            except TimeUnits.DoesNotExist:
-                time_unit = TimeUnits.objects.create(name=step['time_units']['name'])
-
-            try:
-                DishSteps.objects.get(dish=dish, no_step=step['no_step'])
-
-            except DishSteps.DoesNotExist:
-                DishSteps.objects.create(dish=dish, no_step=step['no_step'], step=step['step'], time=step['time'],
-                                         ingredients=step['ingredients'], time_units=time_unit
-                                         )
-
-        return Response('Done')
-
-    except Client.DoesNotExist:
-        raise Http404
+    return Response(response, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])
@@ -275,19 +218,25 @@ def queue_time(request):
     return Response(response)
 
 
-'''  
-To Change
-The system should provide API for the following features:
-● Provide statistical data about the restaurant
-'''
-
-
 @api_view(['GET'])
-def statistics(request):
-    return Response('Statistics')
+def summary_statistics(request):
+    response =[]
+    date_init = request.headers.get('init')
+    date_end = request.headers.get('end')
+    client = request.headers.get('client')
+
+    response.append(get_orders_from(date_init, date_end, request))
+    response.append(get_dishes_by_types(date_init, date_end, request))
+
+    '''
+    if client:
+        client_orders(date_init, date_end)
+        client_dishes(date_init, date_end)
+    '''
+
+    return Response(response)
 
 
 @api_view(['GET'])
 def recommendations(request):
-    return Response('recommendations')
-
+    return Response('Recommendation method that returns a list of likely dishes for client A')

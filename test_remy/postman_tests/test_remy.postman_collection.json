@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "8d560e70-bdff-4f29-87af-061d048dd1c3",
+		"name": "test_remy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"info\": [\r\n        {\r\n            \"url\": \"http://localhost:8000/api/dish/2/\",\r\n            \"name\": \"Hot & Spicy Pizza Variant\",\r\n            \"description\": \"Pizza spicy with a hot combination of peppers, chillies and peperoni, spicy delicious\",\r\n            \"dish_type\": {\r\n                \"url\": \"http://localhost:8000/api/dish_type/1/\",\r\n                \"name\": \"pizza\"\r\n            },\r\n            \"dish_temperature\": {\r\n                \"url\": \"http://localhost:8000/api/dish_temperature/1/\",\r\n                \"name\": \"hot\"\r\n            }\r\n        }\r\n    ],\r\n    \"available\": [\r\n        {\r\n            \"url\": \"http://localhost:8000/api/dish_available/2/\",\r\n            \"temporary\": false,\r\n            \"release_date\": \"2019-12-27\",\r\n            \"end_date\": null\r\n        }\r\n    ],\r\n    \"ingredients\": [\r\n        {\r\n            \"ingredient\": {\r\n                \"url\": \"http://localhost:8000/api/ingredient/1/\",\r\n                \"name\": \"1 cup DIVINA Mushrooms Marinated with Hot Peppers\"\r\n            }\r\n        },\r\n        {\r\n            \"ingredient\": {\r\n                \"url\": \"http://localhost:8000/api/ingredient/2/\",\r\n                \"name\": \"1 cup Peppadew Sweet Piquante Peppers\"\r\n            }\r\n        },\r\n        {\r\n            \"ingredient\": {\r\n                \"url\": \"http://localhost:8000/api/ingredient/3/\",\r\n                \"name\": \"1 Pizza dough\"\r\n            }\r\n        },\r\n        {\r\n            \"ingredient\": {\r\n                \"url\": \"http://localhost:8000/api/ingredient/4/\",\r\n                \"name\": \"1 cup Marinara sauce\"\r\n            }\r\n        },\r\n        {\r\n            \"ingredient\": {\r\n                \"url\": \"http://localhost:8000/api/ingredient/5/\",\r\n                \"name\": \"6 oz Pepperoni, sliced\"\r\n            }\r\n        },\r\n        {\r\n            \"ingredient\": {\r\n                \"url\": \"http://localhost:8000/api/ingredient/6/\",\r\n                \"name\": \"6 oz Fresh mozzarella cheese, sliced\"\r\n            }\r\n        },\r\n        {\r\n            \"ingredient\": {\r\n                \"url\": \"http://localhost:8000/api/ingredient/7/\",\r\n                \"name\": \"Extra virgin olive oil\"\r\n            }\r\n        },\r\n        {\r\n            \"ingredient\": {\r\n                \"url\": \"http://localhost:8000/api/ingredient/8/\",\r\n                \"name\": \"Semolina or all-purpose flour\"\r\n            }\r\n        }\r\n    ],\r\n    \"steps\": [\r\n        {\r\n            \"url\": \"http://localhost:8000/api/dish_steps/1/\",\r\n            \"no_step\": 1,\r\n            \"step\": \"For crispy crust, position pizza stone, or large cast iron pan, 4-5 inches below broiler and heat\",\r\n            \"time\": 30,\r\n            \"ingredients\": null,\r\n            \"time_units\": {\r\n                \"url\": \"http://localhost:8000/api/time_units/2/\",\r\n                \"name\": \"Minutes\"\r\n            }\r\n        },\r\n        {\r\n            \"url\": \"http://localhost:8000/api/dish_steps/2/\",\r\n            \"no_step\": 2,\r\n            \"step\": \"Dust work surface with semolina or flour and with lightly oiled finger tips press and gently stretch dough into a 10-12” circle about ¼” thick\",\r\n            \"time\": 12,\r\n            \"ingredients\": null,\r\n            \"time_units\": {\r\n                \"url\": \"http://localhost:8000/api/time_units/2/\",\r\n                \"name\": \"Minutes\"\r\n            }\r\n        },\r\n        {\r\n            \"url\": \"http://localhost:8000/api/dish_steps/3/\",\r\n            \"no_step\": 3,\r\n            \"step\": \"Pull stone or skillet from oven and drape dough across, carefully re-shaping as necessary\",\r\n            \"time\": 5,\r\n            \"ingredients\": null,\r\n            \"time_units\": {\r\n                \"url\": \"http://localhost:8000/api/time_units/2/\",\r\n                \"name\": \"Minutes\"\r\n            }\r\n        },\r\n        {\r\n            \"url\": \"http://localhost:8000/api/dish_steps/4/\",\r\n            \"no_step\": 4,\r\n            \"step\": \"Quickly top with sauce, mushrooms, peppadew, pepperoni, and mozzarella\",\r\n            \"time\": 2,\r\n            \"ingredients\": null,\r\n            \"time_units\": {\r\n                \"url\": \"http://localhost:8000/api/time_units/2/\",\r\n                \"name\": \"Minutes\"\r\n            }\r\n        },\r\n        {\r\n            \"url\": \"http://localhost:8000/api/dish_steps/5/\",\r\n            \"no_step\": 5,\r\n            \"step\": \"Return to oven and broil until cheese is melted and crust is cooked through\",\r\n            \"time\": 10,\r\n            \"ingredients\": null,\r\n            \"time_units\": {\r\n                \"url\": \"http://localhost:8000/api/time_units/2/\",\r\n                \"name\": \"Minutes\"\r\n            }\r\n        },\r\n        {\r\n            \"url\": \"http://localhost:8000/api/dish_steps/6/\",\r\n            \"no_step\": 6,\r\n            \"step\": \"Drizzle with extra virgin olive oil, slice, and serve\",\r\n            \"time\": 30,\r\n            \"ingredients\": null,\r\n            \"time_units\": {\r\n                \"url\": \"http://localhost:8000/api/time_units/3/\",\r\n                \"name\": \"Seconds\"\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/add/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"add",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dish_details/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "dish",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/dish_details/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"dish_details",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "menu/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/menu/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"menu",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/client/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"client",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new_order/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n    \t\"client\" :\r\n    \t\t{\r\n\t\t        \"url\": \"http://localhost:8000/api/client/1/\",\r\n\t\t        \"name\": \"Jon\",\r\n\t\t        \"surname\": \"Doe\",\r\n\t\t        \"birth_date\": \"1998-11-27\",\r\n\t\t        \"phone\": \"635854912\",\r\n\t\t        \"identification_card\": \"53584286d\",\r\n\t\t        \"mail\": \"jon.doe@test.com\",\r\n\t\t        \"temporal\": false\r\n    \t\t},\r\n    \t\"address\":\r\n    \t    {\r\n\t\t        \"url\": \"http://localhost:8000/api/client_address/1/\",\r\n\t\t        \"address\": \"First ave 500\",\r\n\t\t        \"city\": \"New York\",\r\n\t\t        \"postal_code\": \"10008\",\r\n\t\t        \"client\": \"http://localhost:8000/api/client/1/\"\r\n    \t\t},\r\n\t\t\"dish\":\r\n\t\t[\r\n\t\t\t{\r\n\t\t\t\t\"name\": \"Hot & Spicy Pizza\"\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"name\": \"Hot & Spicy Pizza\"\r\n\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\"name\": \"Hot & Spicy Pizza Xmas\"\r\n\t\t\t}\r\n\t\t\t\r\n\t\t]\r\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/new_order/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"new_order",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client_address/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/client_address/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"client_address",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "open_orders/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "email",
+						"value": "jon.doe@test.com",
+						"type": "text"
+					},
+					{
+						"key": "id",
+						"value": "53584286d",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/open_orders/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"open_orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "track_order/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "order",
+						"value": "18",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/track_order/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"track_order",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queue/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "order",
+						"value": "19",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/queue/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"queue",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
