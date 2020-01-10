@@ -4,7 +4,7 @@
 
 0 - Install the libraries of the file "test_api_restaurant/test_remy/requeriments.txt" <br/>
 1 - Execute in a terminal the script "test_api_restaurant/test_remy/manage.py" (Terminal command - python manage.py runserver)<br/>
-2 - The API servise is running in local, url : http://localhost:8000/api/ <br/>
+2 - The API service is running in local, url : http://localhost:8000/api/ <br/>
 3 - There is an administrator interface webpage that enables an user-friendly database access.  http://localhost:8000/admin/ <br/>
 4 - User: admin - Password: admin  <br/>
 
